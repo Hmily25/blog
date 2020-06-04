@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="renderer" content="webkit">
+  <title></title>
+  <link rel="stylesheet" href="/public/admin/css/pintuer.css">
+  <link rel="stylesheet" href="/public/admin/css/admin.css">
+  <script src="/public/admin/js/jquery.js"></script>
+  <script src="/public/admin/js/pintuer.js"></script>
+</head>
+
+<body>
+  <div class="panel admin-panel">
+    <div class="panel-head">
+      <strong>
+        <span class="icon-key"></span>管理员添加</strong>
+    </div>
+    <div class="body-content">
+      <form method="post" class="form-x" action="/admin/manager/add">
+        <div class="form-group">
+          <div class="label">
+            <label for="name">用户名：</label>
+          </div>
+          <div class="field">
+            <input type="text" class="input" name="name" placeholder="请输入名称" data-validate="required:请输入名称,length#>=3:名称长度不能小于3,length#<=20:名称长度不能大于20"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">密码：</label>
+          </div>
+          <div class="field">
+            <input type="password" class="input" name="pass" placeholder="请输入密码" data-validate="required:请输入密码,length#>=5:新密码不能小于5位"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">确认密码：</label>
+          </div>
+          <div class="field">
+            <input type="password" class="input" name="repass" placeholder="请再次输入密码" data-validate="required:请再次输入密码,repeat#pass:两次输入的密码不一致"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">状态：</label>
+          </div>
+          <div class="field">
+            <input type="radio" style="line-height: 30px;" class="radio" name="status" value="0" checked="checked">白名单</input>
+            <input type="radio"  style="line-height: 30px;" class="radio" name="status" value="1" >黑名单</input>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label></label>
+          </div>
+          <div class="field">
+            <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="renderer" content="webkit">
+  <title></title>
+  <link rel="stylesheet" href="/public/admin/css/pintuer.css">
+  <link rel="stylesheet" href="/public/admin/css/admin.css">
+  <script src="/public/admin/js/jquery.js"></script>
+  <script src="/public/admin/js/pintuer.js"></script>
+</head>
+
+<body>
+  <div class="panel admin-panel">
+    <div class="panel-head">
+      <strong class="icon-reorder">轮播图</strong>
+    </div>
+    <div class="padding border-bottom">
+      <ul class="search" style="padding-left:10px;">
+        <li>
+          <a class="button border-main icon-plus-square-o" href="/admin/slider/add"> 添加</a>
+        </li>
+        <li>搜索：</li>
+        <li>
+          <form action="" method="GET">
+            <input type="text" placeholder="请输入搜索关键字" name="search" value="<%=search%>" class="input"
+              style="width:250px; line-height:17px;display:inline-block" />
+            <button value="" class="button border-main icon-search">搜索</button>
+          </form>
+
+        </li>
+      </ul>
+    </div>
+    <table class="table table-hover text-center">
+      <tr>
+        <th width="100" style="text-align:left; padding-left:20px;">ID</th>
+        <th>名称</th>
+        <th>跳转路径</th>
+        <th>图片路径</th>
+        <th>时间</th>
+        <th width="310">操作</th>
+      </tr>
+      <volist name="list" id="vo">
+        <%data.forEach(item=>{%>
+        <tr>
+          <td>
+            <%=item.id%>
+          </td>
+          <td>
+            <%=item.name%>
+          </td>
+          <td>
+            <%=item.url%>
+          </td>
+          <td>
+            <img src="<%='../..'+item.img%>" width="50px" height="50px" alt="" />
+
+          </td>
+          <td>
+            <%=item.time%>
+          </td>
+
+          <td>
+            <div class="button-group">
+              <a class="button border-main" href="/admin/slider/edit?id=<%=item.id%>">
+                <span class="icon-edit"></span> 修改</a>
+              <a class="button border-red" href="javascript:;" onclick="del(this,'<%=item.id%>','<%=item.img%>')">
+                <span class="icon-trash-o"></span> 删除</a>
+            </div>
+          </td>
+        </tr>
+
+        <%})%>
+
+    </table>
+  </div>
+  <script type="text/javascript">
+    //搜索
+    function status(obj, id, sta) {
+      $.get("/admin/slider/ajax_status", {
+        id: id,
+        sta: sta
+      }, function (data) {
+        if (data == 1) {
+          if (sta == 1)
+            $(obj).parent().html('<a class="button border-red" href="javascript:;" onclick="status(this,' + id +
+              ',0)">黑名单</a>');
+          else
+            $(obj).parent().html('<a class="button border-green" href="javascript:;" onclick="status(this,' + id +
+              ',1)">白名单</a>');
+        }
+      });
+    }
+
+    //删除
+    function del(obj, id, img) {
+      if (confirm("确定要删除吗？")) {
+        $.get("/admin/slider/ajax_del", {
+          id: id, img: img
+        }, function (data) {
+          if (data == 1) {
+            alert("删除成功！");
+            $(obj).parent().parent().parent().remove();
+          } else {
+            alert("删除失败！");
+          }
+        });
+      }
+    }
+
+    //编辑
+    function edit(obj, id) {
+      $.get("/admin/slider/ajax_edit", {
+        id: id
+      }, function (data) {
+        if (data == 1) {
+
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

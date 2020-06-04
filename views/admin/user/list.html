@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="renderer" content="webkit">
+  <title></title>
+  <link rel="stylesheet" href="/public/admin/css/pintuer.css">
+  <link rel="stylesheet" href="/public/admin/css/admin.css">
+  <script src="/public/admin/js/jquery.js"></script>
+  <script src="/public/admin/js/pintuer.js"></script>
+</head>
+
+<body>
+  <div class="panel admin-panel">
+    <div class="panel-head">
+      <strong class="icon-reorder"> 会员</strong>
+    </div>
+    <div class="padding border-bottom">
+      <ul class="search" style="padding-left:10px;">
+
+        <li>搜索：</li>
+        <li>
+          <form action="" method="GET">
+            <input type="text" placeholder="请输入搜索关键字" name="search" value="<%=search%>" class="input"
+              style="width:250px; line-height:17px;display:inline-block" />
+            <button value="" class="button border-main icon-search">搜索</button>
+          </form>
+
+        </li>
+      </ul>
+    </div>
+    <table class="table table-hover text-center">
+      <tr>
+        <th width="100" style="text-align:left; padding-left:20px;">ID</th>
+        <th>名称</th>
+        <th>状态</th>
+        <th>时间</th>
+      </tr>
+      <volist name="list" id="vo">
+        <%data.forEach(item=>{%>
+        <tr>
+          <td>
+            <%=item.id%>
+          </td>
+          <td>
+            <%=item.username%>
+          </td>
+          <td>
+            <%=item.time%>
+          </td>
+          <td>
+            <%=(item.status==0?'白名单':'黑名单')%>
+          </td>
+        </tr>
+        <%})%>
+        <tr>
+          <td colspan="4">
+            <div class="pagelist">
+              <%- pages.show%>
+            </div>
+          </td>
+        </tr>
+      </volist>
+    </table>
+  </div>
+  <script type="text/javascript">
+
+  </script>
+</body>
+
+</html>

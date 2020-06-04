@@ -1,0 +1,14 @@
+
+drop procedure if exists isnerData; 
+delimiter //
+create procedure isnerData() 
+begin
+    declare a int;
+		set a=1;
+		while a<=30 DO -- 循环开始
+        select a;
+				insert into user(id,username,`password`,`status`,time) VALUES(0,CONCAT('ecoso',a),'123',0,UNIX_TIMESTAMP(NOW()));
+				set a=a+1;
+		end while; -- 循环结束
+end 
+//
